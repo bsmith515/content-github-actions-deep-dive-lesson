@@ -45,7 +45,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Upload to s3
-        run: aws s3 cp ${{ github.sha }}.zip s3://my-bucket-a9a09a9c-bd25-4ee2-a080-1e8c4f3fb97c/${{ github.sha }}.zip
+        run: aws s3 cp ${{ github.sha }}.zip s3://${{ secrets.AWS_S3_BUCKET }}/${{ github.sha }}.zip
       
   deploy:
     runs-on: ubuntu-latest
@@ -61,7 +61,7 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name my-function \
-          --s3-bucket my-bucket-a9a09a9c-bd25-4ee2-a080-1e8c4f3fb97c \
+          --s3-bucket ${{ secrets.AWS_S3_BUCKET }} \
           --s3-key ${{ github.sha }}.zip \
           --publish
 
