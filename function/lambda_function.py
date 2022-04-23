@@ -15,7 +15,11 @@ def lambda_handler(event, context):
         return "World"
 
     if event["input"] == "Hi":
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> lesson-docs
         return "Hi There"
 
     else:
